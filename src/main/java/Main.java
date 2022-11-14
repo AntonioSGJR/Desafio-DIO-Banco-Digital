@@ -1,3 +1,4 @@
+import banco.Banco;
 import cliente.Cliente;
 import conta.Conta;
 import conta.ContaCorrente;
@@ -10,10 +11,9 @@ public class Main {
         Conta corrente = new ContaCorrente(antonio);
         Conta poupanca = new ContaPoupanca(antonio);
 
-        corrente.depositar(100);
-        poupanca.sacar(100);
+        Banco santander = new Banco("Santander");
 
-        corrente.imprimirExtrato();
-        poupanca.imprimirExtrato();
+        santander.cadastrarConta(corrente);
+        santander.listarClientes();
     }
 }
