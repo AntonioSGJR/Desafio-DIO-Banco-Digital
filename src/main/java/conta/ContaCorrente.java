@@ -1,8 +1,10 @@
 package conta;
 
-public class ContaCorrente extends Conta{
-    public ContaCorrente(String agencia, String numero, double saldo)
-    {
-        super(agencia, numero, saldo);
+import cliente.Cliente;
+
+public class ContaCorrente extends Conta
+{
+    public ContaCorrente(Cliente cliente) {
+        super(cliente);
     }
 }

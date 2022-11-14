@@ -1,8 +1,10 @@
 package conta;
 
+import cliente.Cliente;
+
 public class ContaPoupanca extends Conta
 {
-    public ContaPoupanca(String agencia, String numero, double saldo) {
-        super(agencia, numero, saldo);
+    public ContaPoupanca(Cliente cliente) {
+        super(cliente);
     }
 }

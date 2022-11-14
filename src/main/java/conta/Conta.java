@@ -1,56 +1,56 @@
 package conta;
 
-import java.util.Locale;
+import cliente.Cliente;
 
-public abstract class Conta
+public abstract class Conta implements ContaInterface
 {
-    private String agencia;
-    private String numero;
-    private double saldo;
+    protected static final String AGENCIA_PADRAO = "1";
+    protected static int sequencial = 0;
+    protected String agencia;
+    protected String numero;
+    protected double saldo = 0d;
+    protected Cliente cliente;
 
-    public Conta(String agencia, String numero, double saldo)
+    public Conta(Cliente cliente)
     {
-        this.agencia = agencia;
-        this.numero = numero;
-        this.saldo = saldo;
+        this.agencia = Conta.AGENCIA_PADRAO;
+        this.numero = String.valueOf(sequencial++);
+        this.cliente = cliente;
     }
+
 
     public String getAgencia() {
         return agencia;
-    }
-
-    public void setAgencia(String agencia) {
-        this.agencia = agencia;
     }
 
     public String getNumero() {
         return numero;
     }
 
-    public void setNumero(String numero) {
-        this.numero = numero;
-    }
-
     public double getSaldo() {
         return saldo;
     }
 
-    public void setSaldo(double saldo) {
-        this.saldo = saldo;
+    @Override
+    public void sacar(double valor) {
+        this.saldo -= valor;
     }
 
-    public void sacar()
-    {
-
+    @Override
+    public void depositar(double valor) {
+        this.saldo += valor;
     }
 
-    public void transferir()
-    {
-
+    @Override
+    public void transferir(double valor, Conta contaDestino) {
+        this.sacar(valor);
+        contaDestino.depositar(valor);
     }
 
-    public void depositar()
+    @Override
+    public void imprimirExtrato()
     {
-
+        System.out.printf("<<<<<<<<<<< EXTRATO >>>>>>>>>>>\nTitular: %s\nAgencia: %s\nNumero: %s\nSaldo: %.2f\n<<<<<<<<<<<<< FIM >>>>>>>>>>>>>\n",
+                this.cliente.getNome(), this.agencia, this.numero, this.saldo);
     }
 }
